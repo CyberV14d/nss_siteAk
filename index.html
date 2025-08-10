@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,49 +11,50 @@
   }
   html, body {
     height: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0d1117;
-    color: #c9d1d9;
-    overflow-y: scroll;
     scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
-  /* Navbar */
-  nav {
+  body {
+    background: #0a0a0a;
+    color: #cdd9e5;
+  }
+
+  /* Header & Nav */
+  header {
     position: fixed;
     top: 0; left: 0; right: 0;
     height: 50px;
-    background: #161b22dd;
+    background: rgba(12, 12, 12, 0.95);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 1rem;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.7);
-    backdrop-filter: saturate(180%) blur(20px);
+    padding: 0 20px;
+    z-index: 10000;
+    box-shadow: 0 0 10px #00f0ffaa;
   }
-  nav .logo {
+  .logo {
+    color: #00f0ff;
     font-weight: 700;
     font-size: 1.25rem;
-    color: #58a6ff;
     user-select: none;
   }
-  nav ul {
-    list-style: none;
+  nav {
     display: flex;
-    gap: 1rem;
+    gap: 20px;
   }
-  nav ul li a {
-    color: #58a6ff;
+  nav a {
+    color: #00f0ff;
     text-decoration: none;
     font-weight: 600;
-    padding: 0.5rem 0.75rem;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.25s ease;
   }
-  nav ul li a:hover, nav ul li a:focus {
-    background: #2384f9;
-    color: white;
+  nav a:hover,
+  nav a:focus {
+    background-color: #00f0ff33;
     outline: none;
   }
 
@@ -61,42 +62,42 @@
   .hamburger {
     display: none;
     flex-direction: column;
+    gap: 5px;
     cursor: pointer;
-    width: 25px;
-    height: 20px;
-    justify-content: space-between;
   }
   .hamburger div {
-    background: #58a6ff;
+    width: 25px;
     height: 3px;
+    background: #00f0ff;
     border-radius: 2px;
   }
 
-  /* Responsive nav */
+  /* Mobile nav panel */
   @media (max-width: 768px) {
-    nav ul {
+    nav {
       position: fixed;
       top: 50px;
-      right: 0;
-      background: #161b22dd;
+      right: -220px;
       flex-direction: column;
+      background: #0c0c0cdd;
       width: 200px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      box-shadow: -2px 0 5px rgba(0,0,0,0.7);
-      border-bottom-left-radius: 10px;
+      height: calc(100% - 50px);
+      padding: 20px;
+      gap: 20px;
+      transition: right 0.3s ease;
+      box-shadow: -5px 0 15px #00f0ffaa;
       border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      z-index: 9999;
     }
-    nav ul.open {
-      max-height: 300px; /* enough to show all items */
-    }
-    nav ul li {
-      margin: 1rem 0;
-      text-align: center;
+    nav.open {
+      right: 0;
     }
     .hamburger {
       display: flex;
+    }
+    nav a {
+      font-size: 1.1rem;
     }
   }
 
@@ -104,198 +105,159 @@
   section {
     scroll-snap-align: start;
     height: 100vh;
-    padding: 80px 40px 40px;
+    padding: 70px 20px 40px; /* top space for fixed header */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     max-width: 900px;
     margin: 0 auto;
-    border-left: 4px solid #2384f9;
-    background: #161b22;
-    box-shadow: 0 0 15px #2384f9aa;
-    border-radius: 10px;
-    transition: box-shadow 0.5s ease;
+    text-align: center;
+    user-select: none;
   }
-  section:hover {
-    box-shadow: 0 0 40px #58a6ff;
+
+  /* Alternating backgrounds */
+  section:nth-of-type(odd) {
+    background: #101820;
   }
+  section:nth-of-type(even) {
+    background: #1a1f2b;
+  }
+
   h1, h2 {
-    font-weight: 700;
-    color: #58a6ff;
+    color: #00f0ff;
+    text-shadow: 0 0 8px #00f0ff88;
     margin-bottom: 20px;
-    text-shadow: 0 0 5px #2384f9aa;
   }
   p, li {
     font-size: 1.1rem;
+    color: #cdd9e5dd;
+    max-width: 600px;
     line-height: 1.5;
-    color: #adbac7;
   }
   ul {
     list-style: none;
     padding-left: 0;
+    margin-top: 10px;
   }
   ul li::before {
     content: "▹";
-    color: #58a6ff;
-    display: inline-block;
-    width: 1em;
-    margin-left: -1em;
+    color: #00f0ff;
+    margin-right: 8px;
   }
 
-  /* Cards container for projects */
+  /* Project cards */
   .cards {
     display: flex;
-    gap: 20px;
+    gap: 25px;
     flex-wrap: wrap;
     justify-content: center;
   }
-
-  /* Project card */
   .card {
-    background: #0f161f;
+    background: #0d1117;
+    border: 1px solid #00f0ff;
     border-radius: 12px;
-    box-shadow: 0 4px 15px #1f2a3aaa;
-    width: 280px;
+    box-shadow: 0 0 15px #00f0ff88;
     padding: 20px;
-    color: #c9d1d9;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 260px;
     cursor: default;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   .card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 10px 25px #58a6ffaa;
+    box-shadow: 0 0 25px #00f0ffcc;
   }
   .card h3 {
-    margin-bottom: 15px;
-    color: #58a6ff;
-    text-shadow: 0 0 8px #2384f9aa;
+    color: #00f0ff;
+    margin-bottom: 10px;
   }
   .card p {
-    font-size: 1rem;
-    line-height: 1.4;
-    color: #adbac7;
-  }
-
-  footer {
-    text-align: center;
-    padding: 20px;
-    color: #484f58;
-    font-size: 0.9rem;
-    user-select: none;
-  }
-
-  @media (max-width: 600px) {
-    section {
-      padding: 70px 20px 30px;
-      border-left: none;
-      border-radius: 0;
-      box-shadow: none;
-    }
-    nav {
-      height: 45px;
-      padding: 0 0.5rem;
-    }
-    nav ul.open {
-      max-height: none;
-      position: static;
-      flex-direction: column;
-      box-shadow: none;
-      background: transparent;
-    }
-    nav ul {
-      max-height: 0;
-      width: 100%;
-      background: transparent;
-      box-shadow: none;
-    }
-    nav ul li {
-      margin: 0.5rem 0;
-    }
-    .cards {
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
-    }
-    .card {
-      width: 100%;
-      max-width: 300px;
-    }
+    color: #cdd9e5cc;
   }
 </style>
 </head>
 <body>
 
-<nav>
+<header>
   <div class="logo">NSS Caragiale</div>
-  <div class="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+  <div class="hamburger" tabindex="0" role="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu" id="hamburger">
     <div></div>
     <div></div>
     <div></div>
   </div>
+  <nav id="nav-menu">
+    <a href="#despre">Despre</a>
+    <a href="#membri">Membri</a>
+    <a href="#premii">Premii</a>
+    <a href="#proiecte">Proiecte</a>
+    <a href="#sponsori">Sponsori</a>
+  </nav>
+</header>
+
+<section id="despre" tabindex="0">
+  <h1>Despre NSS Caragiale</h1>
+  <p>Clubul NSS Caragiale face parte din Colegiul Național „Ion Luca Caragiale” și participă anual la National Space Society Settlement Contest.</p>
+</section>
+
+<section id="membri" tabindex="0">
+  <h1>Membri</h1>
+  <p>Clubul este format din elevi pasionați de știință, inginerie și astronomie, care colaborează la proiecte inovatoare cu aplicații spațiale.</p>
+</section>
+
+<section id="premii" tabindex="0">
+  <h1>Premii</h1>
+  <p>In anii trecuti, clubul a obținut rezultate remarcabile:</p>
   <ul>
-    <li><a href="#home" tabindex="1">Home</a></li>
-    <li><a href="#members" tabindex="2">Members</a></li>
-    <li><a href="#prizes" tabindex="3">Prizes</a></li>
-    <li><a href="#projects" tabindex="4">Projects & Articles</a></li>
-    <li><a href="#sponsors" tabindex="5">Sponsors</a></li>
-  </ul>
-</nav>
-
-<section id="home" tabindex="0">
-  <h1>Welcome to NSS Caragiale</h1>
-  <p>We are passionate innovators competing in the National Space Society contest and beyond.</p>
-</section>
-
-<section id="members" tabindex="0">
-  <h2>Our Members</h2>
-  <p>Meet our amazing team of scientists, engineers, and dreamers.</p>
-</section>
-
-<section id="prizes" tabindex="0">
-  <h2>Prizes Won</h2>
-  <ul>
-    <li>1st Place – NSS Contest 2024</li>
-    <li>Best Engineering Design – 2023</li>
+    <li><strong>2025-Locul I</strong> – Echipa Arkadia-10</li>
+    <li><strong>2025-Locul III</strong> – Echipa Demetra</li>
+    <li><strong>2025-Mențiune Onorifică</strong> – Echipa Bioma</li>
+    <li><strong>2024-Locul II</strong> – Echipa Elipsis</li>
   </ul>
 </section>
 
-<section id="projects" tabindex="0">
-  <h2>Past Projects & Articles</h2>
+<section id="proiecte" tabindex="0">
+  <h1>Proiecte</h1>
   <div class="cards">
-    <article class="card" tabindex="0" aria-label="Project Arkadia-10">
+    <div class="card" tabindex="0" aria-label="Proiect Arkadia-10">
       <h3>Arkadia-10</h3>
-      <p>An advanced space exploration rover designed for autonomous surface mapping and resource analysis on Mars.</p>
-    </article>
-    <article class="card" tabindex="0" aria-label="Project Em-10">
+      <p>Un proiect despre o așezare localizată pe punctul L5 Marte-Soare, axată pe comunicații interplanetare.</p>
+    </div>
+    <div class="card" tabindex="0" aria-label="Proiect Em-10">
       <h3>Em-10</h3>
-      <p>A modular habitat unit prototype focused on sustainable living in extreme extraterrestrial environments.</p>
-    </article>
+      <p>...</p>
+    </div>
   </div>
 </section>
 
-<section id="sponsors" tabindex="0">
-  <h2>Our Sponsors</h2>
-  <p>We thank our generous sponsors for supporting our vision.</p>
+<section id="sponsori" tabindex="0">
+  <h1>Sponsori</h1>
+  <p>Mulțumim partenerilor și sponsorilor care sprijină activitatea clubului.</p>
 </section>
-
-<footer>
-  &copy; 2025 NSS Caragiale
-</footer>
 
 <script>
-  const hamburger = document.querySelector('.hamburger');
-  const navUl = document.querySelector('nav ul');
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('nav-menu');
 
-  hamburger.addEventListener('click', () => {
-    navUl.classList.toggle('open');
-  });
+  function toggleMenu() {
+    const isOpen = navMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+  }
 
-  // Accessibility: allow toggling menu with keyboard (Enter or Space)
-  hamburger.addEventListener('keydown', (e) => {
+  hamburger.addEventListener('click', toggleMenu);
+  hamburger.addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      navUl.classList.toggle('open');
+      toggleMenu();
     }
+  });
+
+  // Close menu on link click (mobile)
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (navMenu.classList.contains('open')) {
+        toggleMenu();
+      }
+    });
   });
 </script>
 
